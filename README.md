@@ -35,88 +35,13 @@ This project is a Flask-based web application designed to control and monitor a 
 4. **Access the Application**:
    Open your web browser and navigate to http://localhost:5000.
 
-Usage
-GPIO Control
-Endpoint: /gpio/toggle/<int:pin>
-Method: POST
-Body: {"state": true} or {"state": false}
-Description: Toggles the state of the specified GPIO pin.
-Wi-Fi Management
-Scan Wi-Fi Networks:
+## Configuration
+- **Secret Key**:: Set a strong secret key in app.secret_key.
+- **Database**: Configure the database URI in app.config['SQLALCHEMY_DATABASE_URI'].
+- **SSH Connection**: Set the SSH host, port, username, and password in the respective variables.
 
-Endpoint: /scan_wifi
-Method: GET
-Description: Scans for available Wi-Fi networks.
-Connect to Wi-Fi:
+## Contributing
+Contributions are welcome! Please fork the repository and submit a pull request.
 
-Endpoint: /connect_wifi
-Method: POST
-Body: {"ssid": "your_ssid", "password": "your_password"}
-Description: Connects to the specified Wi-Fi network.
-Bluetooth Management
-Scan Bluetooth Devices:
-
-Endpoint: /scan_bluetooth
-Method: GET
-Description: Scans for available Bluetooth devices.
-Connect to Bluetooth Device:
-
-Endpoint: /connect_bluetooth
-Method: POST
-Body: {"mac_address": "your_mac_address"}
-Description: Connects to the specified Bluetooth device.
-System Monitoring
-CPU Usage:
-
-Endpoint: /cpu_usage
-Method: GET
-Description: Returns the current CPU usage.
-RAM Usage:
-
-Endpoint: /ram_usage
-Method: GET
-Description: Returns the current RAM usage.
-GPU Usage:
-
-Endpoint: /gpu_usage
-Method: GET
-Description: Returns the current GPU usage.
-Disk Usage:
-
-Endpoint: /disk_usage
-Method: GET
-Description: Returns the current disk usage.
-Network Usage:
-
-Endpoint: /network_usage
-Method: GET
-Description: Returns the current network usage.
-Remote Command Execution
-Execute Command:
-Endpoint: /execute
-Method: POST
-Body: {"command": "your_command"}
-Description: Executes the specified command on the Raspberry Pi via SSH.
-User Authentication
-Login:
-
-Endpoint: /login
-Method: POST
-Body: {"username": "your_username", "password": "your_password"}
-Description: Logs in the user.
-Register:
-
-Endpoint: /register
-Method: POST
-Body: {"username": "your_username", "email": "your_email", "password": "your_password"}
-Description: Registers a new user.
-Logout:
-
-Endpoint: /logout
-Method: GET
-Description: Logs out the user.
-Wi-Fi Access Point Setup
-Setup Wi-Fi AP:
-Endpoint: /setup_wifi_ap
-Method: POST
-Description: Configures the Raspberry Pi as a Wi-Fi access point. 
+## License
+This project is licensed under the MIT License.
