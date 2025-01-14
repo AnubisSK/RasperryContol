@@ -16,4 +16,4 @@ This project is a Flask-based web application designed to control and monitor a 
 1. **Clone the Repository**:
    ```bash
    git clone https://github.com/AnubisSK/RasperryContol.git
-   cd raspberry-pi-controller
+   cd RaspberryContol
