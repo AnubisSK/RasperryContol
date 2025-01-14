@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="sk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard</title>
+    <script src="https://cdn.tailwindcss.com">
+    </script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet"/>
+
+</head>
+<body class="bg-[#121212] text-white">
+    <nav class="bg-[#121212] p-4 flex justify-between items-center">
+        <div class="text-xl font-bold">
+         RasperryContol
+        </div>
+        <div class="space-x-4">
+         <a class="hover:text-gray-400" href="{{ url_for('home') }}">
+          Domov
+         </a>
+         <a class="hover:text-gray-400" href="{{ url_for('konzola') }}">
+          Konzola
+         </a>
+         <a class="hover:text-gray-400" href="{{ url_for('gpio_ovladanie') }}">
+          GPIO Ovladanie
+         </a>
+         <a class="hover:text-gray-400" href="{{ url_for('wifi') }}">
+          Skenovať Wi-Fi
+         </a>
+         <a class="hover:text-gray-400" href="{{ url_for('bluetooth') }}">
+            Skenovať Bluetooth
+        </a>
+         <a class="hover:text-gray-400" href="#">
+          Napoveda
+         </a>
+         <a class="hover:text-gray-400" href="{{ url_for('logout') }}">Odhlásiť sa</a>
+        </div>
+        <div class="flex items-center space-x-2">
+         <span>
+            Vitajte, {{ username }}!
+         </span>
+        </div>
+    </nav>
+
+    <main class="p-8">
+        <h1 class="text-3xl font-bold text-center mb-8">
+         System Usage Dashboard
+        </h1>
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
+         <div class="bg-gray-700 p-6 rounded-lg text-center">
+          <i class="fas fa-microchip text-2xl mb-2">
+          </i>
+          <h2 class="text-xl font-semibold">
+           CPU Usage
+          </h2>
+          <p class="text-lg" id="cpu-usage">
+            Loading...
+          </p>
+         </div>
+         <div class="bg-gray-700 p-6 rounded-lg text-center">
+          <i class="fas fa-memory text-2xl mb-2">
+          </i>
+          <h2 class="text-xl font-semibold">
+           RAM Usage
+          </h2>
+          <p class="text-lg" id="ram-usage-percent">Loading...</p>
+          <p class="text-sm" id="ram-usage-gb">Loading...</p>
+          <p class="text-sm" id="ram-total-gb">Loading...</p>
+         </div>
+         <div class="bg-gray-700 p-6 rounded-lg text-center">
+          <i class="fas fa-video text-2xl mb-2">
+          </i>
+          <h2 class="text-xl font-semibold">
+           GPU Usage
+          </h2>
+          <p class="text-lg" id="gpu-usage-percent">Loading...</p>
+          <p class="text-sm" id="vram-usage-gb">Loading...</p>
+          <p class="text-sm" id="vram-total-gb">Loading...</p>
+         </div>
+         <div class="bg-gray-700 p-6 rounded-lg text-center">
+          <i class="fas fa-hdd text-2xl mb-2">
+          </i>
+          <h2 class="text-xl font-semibold">
+           Disk Usage
+          </h2>
+          <p class="text-lg" id="disk-usage-percent">Loading...</p>
+          <p class="text-sm" id="disk-used-gb">Loading...</p>
+          <p class="text-sm" id="disk-free-gb">Loading...</p>
+         </div>
+         <div class="bg-gray-700 p-6 rounded-lg text-center">
+          <i class="fas fa-wifi text-2xl mb-2">
+          </i>
+          <h2 class="text-xl font-semibold">
+           Internet Usage
+          </h2>
+          <p class="text-lg" id="network-usage-percent">Loading...</p>
+          <p class="text-sm" id="total-gb">Loading...</p>
+          <p class="text-sm" id="ip-address">Loading...</p>
+         </div>
+        </div>
+        <h1 class="text-3xl font-bold text-center mb-8">
+         Console
+        </h1>
+        <div class="bg-gray-800 p-4 rounded-lg h-64 overflow-y-auto" id="console-log">
+            <!-- Konzolové správy sa tu zobrazia -->
+        </div>
+     </div>
+
+      </main>
+       <footer class="text-center p-4 mt-8">
+        <p>
+         © 2025 AnubisSVK. All rights reserved.
+        </p>
+       </footer>
+    <script>
+        fetch('/cpu_usage')
+            .then(response => response.json())
+            .then(data => {
+                document.getElementById('cpu-usage').textContent = `${data.cpu_usage}%`;
+            });
+
+        fetch('/ram_usage')
+        .then(response => response.json())
+        .then(data => {
+            document.getElementById('ram-usage-percent').textContent = `Percentuálne využitie RAM: ${data.ram_usage_percent}%`;
+            document.getElementById('ram-usage-gb').textContent = `Využitie RAM: ${data.ram_usage_gb} GB`;
+            document.getElementById('ram-total-gb').textContent = `Celková kapacita RAM: ${data.ram_total_gb} GB`;
+        });
+
+        fetch('/gpu_usage')
+        .then(response => response.json())
+        .then(data => {
+            document.getElementById('gpu-usage-percent').textContent = `Percentuálne využitie GPU: ${data.gpu_usage_percent}%`;
+            document.getElementById('vram-usage-gb').textContent = `Využitie VRAM: ${data.vram_usage_gb} GB`;
+            document.getElementById('vram-total-gb').textContent = `Celková kapacita VRAM: ${data.vram_total_gb} GB`;
+        });
+
+        fetch('/disk_usage')
+        .then(response => response.json())
+        .then(data => {
+            document.getElementById('disk-usage-percent').textContent = `Percentuálne využitie disku: ${data.disk_usage_percent}%`;
+            document.getElementById('disk-used-gb').textContent = `Využitie disku: ${data.disk_used_gb} GB`;
+            document.getElementById('disk-free-gb').textContent = `Voľné miesto na disku: ${data.disk_free_gb} GB`;
+        });
+
+        fetch('/network_usage')
+        .then(response => response.json())
+        .then(data => {
+            document.getElementById('network-usage-percent').textContent = `Percentuálne využitie siete: ${data.network_usage_percent}%`;
+            document.getElementById('total-gb').textContent = `Celkové využit ie: ${data.total_gb} GB`;
+            document.getElementById('ip-address').textContent = `IP adresa: ${data.ip_address}`;
+        });
+
+        fetch('/console_log')
+        .then(response => response.json())
+        .then(data => {
+            const consoleLog = document.getElementById('console-log');
+            consoleLog.innerHTML = ''; // Vyčistiť predchádzajúce správy
+            data.logs.forEach(log => {
+                const logEntry = document.createElement('p');
+                logEntry.className = 'text-sm font-mono';
+                logEntry.textContent = log;
+                consoleLog.appendChild(logEntry);
+            });
+        });
+
+    </script>
+</body>
+</html>

@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="sk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Skenovanie Wi-Fi</title>
+    <script>
+        async function scanWifi() {
+            const response = await fetch('/scan_wifi');
+            const data = await response.json();
+            const wifiList = document.getElementById('wifi-list');
+            wifiList.innerHTML = '';
+            data.forEach(network => {
+                const li = document.createElement('li');
+                li.textContent = `${network.ssid} - ${network.security} - ${network.signal}`;
+                wifiList.appendChild(li);
+            });
+        }
+
+        async function connectWifi() {
+            const ssid = document.getElementById('ssid').value;
+            const password = document.getElementById('password').value;
+            const response = await fetch('/connect_wifi', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ ssid, password })
+            });
+            const result = await response.json();
+            alert(result.message || result.error);
+        }
+    </script>
+</head>
+<body>
+    <h1>Skenovanie Wi-Fi sietí</h1>
+    <button onclick="scanWifi()">Skenovať Wi-Fi</button>
+    <ul id="wifi-list"></ul>
+    <h2>Pripojiť sa k Wi-Fi</h2>
+    <input type="text" id="ssid" placeholder="SSID">
+    <input type="password" id="password" placeholder="Heslo">
+    <button onclick="connectWifi()">Pripojiť</button>
+</body>
+</html>

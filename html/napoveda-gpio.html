@@ -1,0 +1,524 @@
+<html lang="sk">
+ <head>
+  <meta charset="utf-8"/>
+  <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+  <title>
+   Raspberry Pi 5 GPIO Ovládanie
+  </title>
+  <script src="https://cdn.tailwindcss.com">
+  </script>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet"/>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&amp;display=swap" rel="stylesheet"/>
+ </head>
+ <body class="bg-gray-900 text-white font-roboto">
+    <header class="bg-gray-800 p-4">
+     <div class="container mx-auto flex justify-between items-center">
+      <h1 class="text-2xl font-bold">
+       Raspberry Pi 5 GPIO Ovládanie
+      </h1>
+      <nav>
+       <ul class="flex space-x-4">
+        <li>
+         <a class="hover:text-gray-400" href="#">
+          Domov
+         </a>
+        </li>
+        <li>
+         <a class="hover:text-gray-400" href="#">
+          O nás
+         </a>
+        </li>
+        <li>
+         <a class="hover:text-gray-400" href="#">
+          Kontakt
+         </a>
+        </li>
+       </ul>
+      </nav>
+     </div>
+    </header>
+    <main class="container mx-auto p-4">
+     <section class="mb-8">
+      <h2 class="text-xl font-bold mb-4">
+       Prehľad Raspberry Pi 5
+      </h2>
+      <div class="flex flex-col md:flex-row items-center">
+       <img alt="Detailný obrázok Raspberry Pi 5 zobrazujúci všetky komponenty a porty" class="w-full md:w-1/2 mb-4 md:mb-0 md:mr-4" height="200" src="https://storage.googleapis.com/a1aa/image/5hP2mnH8ps7bD96eR1zuqjOrdJa01CpFzB8yGvp33seb4cDUA.jpg" width="300"/>
+       <p class="text-gray-300">
+        Raspberry Pi 5 je najnovší model v sérii Raspberry Pi. Ponúka rýchlejší procesor, viac pamäte RAM a vylepšené možnosti pripojenia. Je ideálny pre širokú škálu aplikácií, od domácej automatizácie po vzdelávacie projekty.
+       </p>
+      </div>
+     </section>
+     <section>
+      <h2 class="text-xl font-bold mb-4">
+       GPIO Pinout
+      </h2>
+      <div class="overflow-x-auto">
+       <table class="min-w-full bg-gray-800 text-gray-300">
+        <thead>
+         <tr>
+          <th class="py-2 px-4 border-b border-gray-700">
+           Číslo pinu
+          </th>
+          <th class="py-2 px-4 border-b border-gray-700">
+           Názov
+          </th>
+          <th class="py-2 px-4 border-b border-gray-700">
+           Popis
+          </th>
+         </tr>
+        </thead>
+        <tbody>
+         <tr>
+          <td class="py-2 px-4 border-b border-gray-700">
+           1
+          </td>
+          <td class="py-2 px-4 border-b border-gray-700">
+           3.3V
+          </td>
+          <td class="py-2 px-4 border-b border-gray-700">
+           Napájanie
+          </td>
+         </tr>
+         <tr>
+          <td class="py-2 px-4 border-b border-gray-700">
+           2
+          </td>
+          <td class="py-2 px-4 border-b border-gray-700">
+           5V
+          </td>
+          <td class="py-2 px-4 border-b border-gray-700">
+           Napájanie
+          </td>
+         </tr>
+         <tr>
+          <td class="py-2 px-4 border-b border-gray-700">
+           3
+          </td>
+          <td class="py-2 px-4 border-b border-gray-700">
+           GPIO 2 (SDA1, I2C)
+          </td>
+          <td class="py-2 px-4 border-b border-gray-700">
+           Všeobecný účel I/O
+          </td>
+         </tr>
+         <tr>
+          <td class="py-2 px-4 border-b border-gray-700">
+           4
+          </td>
+          <td class="py-2 px-4 border-b border-gray-700">
+           5V
+          </td>
+          <td class="py-2 px-4 border-b border-gray-700">
+           Napájanie
+          </td>
+         </tr>
+         <tr>
+          <td class="py-2 px-4 border-b border-gray-700">
+           5
+          </td>
+          <td class="py-2 px-4 border-b border-gray-700">
+           GPIO 3 (SCL1, I2C)
+          </td>
+          <td class="py-2 px-4 border-b border-gray-700">
+           Všeobecný účel I/O
+          </td>
+         </tr>
+         <tr>
+          <td class="py-2 px-4 border-b border-gray-700">
+           6
+          </td>
+          <td class="py-2 px-4 border-b border-gray-700">
+           GND
+          </td>
+          <td class="py-2 px-4 border-b border-gray-700">
+           Zem
+          </td>
+         </tr>
+         <tr>
+          <td class="py-2 px-4 border-b border-gray-700">
+           7
+          </td>
+          <td class="py-2 px-4 border-b border-gray-700">
+           GPIO 4
+          </td>
+          <td class="py-2 px-4 border-b border-gray-700">
+           Všeobecný účel I/O
+          </td>
+         </tr>
+         <tr>
+          <td class="py-2 px-4 border-b border-gray-700">
+           8
+          </td>
+          <td class="py-2 px-4 border-b border-gray-700">
+           GPIO 14 (TXD0)
+          </td>
+          <td class="py-2 px-4 border-b border-gray-700">
+           Všeobecný účel I/O
+          </td>
+         </tr>
+         <tr>
+          <td class="py-2 px-4 border-b border-gray-700">
+           9
+          </td>
+          <td class="py-2 px-4 border-b border-gray-700">
+           GND
+          </td>
+          <td class="py-2 px-4 border-b border-gray-700">
+           Zem
+          </td>
+         </tr>
+         <tr>
+          <td class="py-2 px-4 border-b border-gray-700">
+           10
+          </td>
+          <td class="py-2 px-4 border-b border-gray-700">
+           GPIO 15 (RXD0)
+          </td>
+          <td class="py-2 px-4 border-b border-gray-700">
+           Všeobecný účel I/O
+          </td>
+         </tr>
+         <tr>
+          <td class="py-2 px-4 border-b border-gray-700">
+           11
+          </td>
+          <td class="py-2 px-4 border-b border-gray-700">
+           GPIO 17
+          </td>
+          <td class="py-2 px-4 border-b border-gray-700">
+           Všeobecný účel I/O
+          </td>
+         </tr>
+         <tr>
+          <td class="py-2 px-4 border-b border-gray-700">
+           12
+          </td>
+          <td class="py-2 px-4 border-b border-gray-700">
+           GPIO 18
+          </td>
+          <td class="py-2 px-4 border-b border-gray-700">
+           Všeobecný účel I/O
+          </td>
+         </tr>
+         <tr>
+          <td class="py-2 px-4 border-b border-gray-700">
+           13
+          </td>
+          <td class="py-2 px-4 border-b border-gray-700">
+           GPIO 27
+          </td>
+          <td class="py-2 px-4 border-b border-gray-700">
+           Všeobecný účel I/O
+          </td>
+         </tr>
+         <tr>
+          <td class="py-2 px-4 border-b border-gray-700">
+           14
+          </td>
+          <td class="py-2 px-4 border-b border-gray-700">
+           GND
+          </td>
+          <td class="py-2 px-4 border-b border-gray-700">
+           Zem
+          </td>
+         </tr>
+         <tr>
+          <td class="py-2 px-4 border-b border-gray-700">
+           15
+          </td>
+          <td class="py-2 px-4 border-b border-gray-700">
+           GPIO 22
+          </td>
+          <td class="py-2 px-4 border-b border-gray-700">
+           Všeobecný účel I/O
+          </td>
+         </tr>
+         <tr>
+          <td class="py-2 px-4 border-b border-gray-700">
+           16
+          </td>
+          <td class="py-2 px-4 border-b border-gray-700">
+           GPIO 23
+          </td>
+          <td class="py-2 px-4 border-b border-gray-700">
+           Všeobecný účel I/O
+          </td>
+         </tr>
+         <tr>
+          <td class="py-2 px-4 border-b border-gray-700">
+           17
+          </td>
+          <td class="py-2 px-4 border-b border-gray-700">
+           3.3V
+          </td>
+          <td class="py-2 px-4 border-b border-gray-700">
+           Napájanie
+          </td>
+         </tr>
+         <tr>
+          <td class="py-2 px-4 border-b border-gray-700">
+           18
+          </td>
+          <td class="py-2 px-4 border-b border-gray-700">
+           GPIO 24
+          </td>
+          <td class="py-2 px-4 border-b border-gray-700">
+           Všeobecný účel I/O
+          </td>
+         </tr>
+         <tr>
+          <td class="py-2 px-4 border-b border-gray-700">
+           19
+          </td>
+          <td class="py-2 px-4 border-b border-gray-700">
+           GPIO 10 (MOSI)
+          </td>
+          <td class="py-2 px-4 border-b border-gray-700">
+           Všeobecný účel I/O
+          </td>
+         </tr>
+         <tr>
+          <td class="py-2 px-4 border-b border-gray-700">
+           20
+          </td>
+          <td class="py-2 px-4 border-b border-gray-700">
+           GND
+          </td>
+          <td class="py-2 px-4 border-b border-gray-700">
+           Zem
+          </td>
+         </tr>
+         <tr>
+          <td class="py-2 px-4 border-b border-gray-700">
+           21
+          </td>
+          <td class="py-2 px-4 border-b border-gray-700">
+           GPIO 9 (MISO)
+          </td>
+          <td class="py-2 px-4 border-b border-gray-700">
+           Všeobecný účel I/O
+          </td>
+         </tr>
+         <tr>
+          <td class="py-2 px-4 border-b border-gray-700">
+           22
+          </td>
+          <td class="py-2 px-4 border-b border-gray-700">
+           GPIO 25
+          </td>
+          <td class="py-2 px-4 border-b border-gray-700">
+           Všeobecný účel I/O
+          </td>
+         </tr>
+         <tr>
+          <td class="py-2 px-4 border-b border-gray-700">
+           23
+          </td>
+          <td class="py-2 px-4 border-b border-gray-700">
+           GPIO 11 (SCLK)
+          </td>
+          <td class="py-2 px-4 border-b border-gray-700">
+           Všeobecný účel I/O
+          </td>
+         </tr>
+         <tr>
+          <td class="py-2 px-4 border-b border-gray-700">
+           24
+          </td>
+          <td class="py-2 px-4 border-b border-gray-700">
+           GPIO 8 (CE0)
+          </td>
+          <td class="py-2 px-4 border-b border-gray-700 Všeobecný účel I/O"></td>
+
+         </tr>
+         <tr>
+          <td class="py-2 px-4 border-b border-gray-700">
+           25
+          </td>
+          <td class="py-2 px-4 border-b border-gray-700">
+           GND
+          </td>
+          <td class="py-2 px-4 border-b border-gray-700">
+           Zem
+          </td>
+         </tr>
+         <tr>
+          <td class="py-2 px-4 border-b border-gray-700">
+           26
+          </td>
+          <td class="py-2 px-4 border-b border-gray-700">
+           GPIO 7 (CE1)
+          </td>
+          <td class="py-2 px-4 border-b border-gray-700">
+           Všeobecný účel I/O
+          </td>
+         </tr>
+         <tr>
+          <td class="py-2 px-4 border-b border-gray-700">
+           27
+          </td>
+          <td class="py-2 px-4 border-b border-gray-700">
+           ID_SD
+          </td>
+          <td class="py-2 px-4 border-b border-gray-700">
+           I2C ID EEPROM
+          </td>
+         </tr>
+         <tr>
+          <td class="py-2 px-4 border-b border-gray-700">
+           28
+          </td>
+          <td class="py-2 px-4 border-b border-gray-700">
+           ID_SC
+          </td>
+          <td class="py-2 px-4 border-b border-gray-700">
+           I2C ID EEPROM
+          </td>
+         </tr>
+         <tr>
+          <td class="py-2 px-4 border-b border-gray-700">
+           29
+          </td>
+          <td class="py-2 px-4 border-b border-gray-700">
+           GPIO 5
+          </td>
+          <td class="py-2 px-4 border-b border-gray-700">
+           Všeobecný účel I/O
+          </td>
+         </tr>
+         <tr>
+          <td class="py-2 px-4 border-b border-gray-700">
+           30
+          </td>
+          <td class="py-2 px-4 border-b border-gray-700">
+           GND
+          </td>
+          <td class="py-2 px-4 border-b border-gray-700">
+           Zem
+          </td>
+         </tr>
+         <tr>
+          <td class="py-2 px-4 border-b border-gray-700">
+           31
+          </td>
+          <td class="py-2 px-4 border-b border-gray-700">
+           GPIO 6
+          </td>
+          <td class="py-2 px-4 border-b border-gray-700">
+           Všeobecný účel I/O
+          </td>
+         </tr>
+         <tr>
+          <td class="py-2 px-4 border-b border-gray-700">
+           32
+          </td>
+          <td class="py-2 px-4 border-b border-gray-700">
+           GPIO 12
+          </td>
+          <td class="py-2 px-4 border-b border-gray-700">
+           Všeobecný účel I/O
+          </td>
+         </tr>
+         <tr>
+          <td class="py-2 px-4 border-b border-gray-700">
+           33
+          </td>
+          <td class="py-2 px-4 border-b border-gray-700">
+           GPIO 13
+          </td>
+          <td class="py-2 px-4 border-b border-gray-700">
+           Všeobecný účel I/O
+          </td>
+         </tr>
+         <tr>
+          <td class="py-2 px-4 border-b border-gray-700">
+           34
+          </td>
+          <td class="py-2 px-4 border-b border-gray-700">
+           GND
+          </td>
+          <td class="py-2 px-4 border-b border-gray-700">
+           Zem
+          </td>
+         </tr>
+         <tr>
+          <td class="py-2 px-4 border-b border-gray-700">
+           35
+          </td>
+          <td class="py-2 px-4 border-b border-gray-700">
+           GPIO 19
+          </td>
+          <td class="py-2 px-4 border-b border-gray-700">
+   Všeobecný účel I/O
+          </td>
+         </tr>
+         <tr>
+          <td class="py-2 px-4 border-b border-gray-700">
+           36
+          </td>
+          <td class="py-2 px-4 border-b border-gray-700">
+           GPIO 16
+          </td>
+          <td class="py-2 px-4 border-b border-gray-700">
+           Všeobecný účel I/O
+          </td>
+         </tr>
+         <tr>
+          <td class="py-2 px-4 border-b border-gray-700">
+           37
+          </td>
+          <td class="py-2 px-4 border-b border-gray-700">
+           GPIO 26
+          </td>
+          <td class="py-2 px-4 border-b border-gray-700">
+           Všeobecný účel I/O
+          </td>
+         </tr>
+         <tr>
+          <td class="py-2 px-4 border-b border-gray-700">
+           38
+          </td>
+          <td class="py-2 px-4 border-b border-gray-700">
+           GPIO 20
+          </td>
+          <td class="py-2 px-4 border-b border-gray-700">
+           Všeobecný účel I/O
+          </td>
+         </tr>
+         <tr>
+          <td class="py-2 px-4 border-b border-gray-700">
+           39
+          </td>
+          <td class="py-2 px-4 border-b border-gray-700">
+           GND
+          </td>
+          <td class="py-2 px-4 border-b border-gray-700">
+           Zem
+          </td>
+         </tr>
+         <tr>
+          <td class="py-2 px-4 border-b border-gray-700">
+           40
+          </td>
+          <td class="py-2 px-4 border-b border-gray-700">
+           GPIO 21
+          </td>
+          <td class="py-2 px-4 border-b border-gray-700">
+           Všeobecný účel I/O
+          </td>
+         </tr>
+        </tbody>
+       </table>
+      </div>
+     </section>
+    </main>
+    <footer class="bg-gray-800 p-4 mt-8">
+     <div class="container mx-auto text-center">
+      <p>
+       © 2025 AnubisSVK Ovládanie GPIO. Všetky práva vyhradené.
+      </p>
+     </div>
+    </footer>
+   </body>
+  </html>

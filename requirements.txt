@@ -1,0 +1,8 @@
+flask==2.0.1
+paramiko==2.7.2
+psutil==5.9.0
+GPUtil==1.4.0
+werkzeug==2.0.1
+SQLAlchemy==1.4.26
+python-socketio==5.1.0
+RPi.GPIO==0.7.0

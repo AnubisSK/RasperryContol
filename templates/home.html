@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="sk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Domov - Raspberry Control System</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet"/>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&amp;display=swap" rel="stylesheet"/>
+    <style>
+     body {
+              font-family: 'Roboto', sans-serif;
+          }
+    </style>
+</head>
+<body class="bg-gray-900 text-white">
+    <header class="p-4 bg-gray-800 shadow-md">
+        <div class="container mx-auto flex justify-between items-center">
+         <h1 class="text-2xl font-bold">
+          Raspberry Control
+         </h1>
+         <nav>
+          <ul class="flex space-x-4">
+           <li>
+            {% if 'username' in session %}
+            <a class="hover:text-gray-400" href="#">
+                Ste prihlásený ako <strong>{{ session['username'] }}</strong>.
+            </a>
+           </li>
+           <li>
+            <a class="hover:text-gray-400" href="{{ url_for('logout') }}">
+                Odhlásiť sa
+            </a>
+           </li>
+           <li>
+            <a class="hover:text-gray-400" href="{{ url_for('dashboard') }}">
+                Dashboard
+            </a>
+           </li>
+           {% else %}
+           <li>
+            <a class="hover:text-gray-400" href="{{ url_for('login') }}">
+                Prihlásiť sa
+            </a>
+           </li>
+           <li>
+            <a class="hover:text-gray-400" href="{{ url_for('register') }}">
+                Registrovať sa
+            </a>
+           </li>
+          </ul>
+          {% endif %}
+         </nav>
+        </div>
+       </header>
+
+       <main class="container mx-auto p-4">
+        <section class="flex flex-col md:flex-row items-center my-8">
+         <div class="md:w-1/2">
+          <img alt="A detailed 3D rendering of a Raspberry Pi with wireless control icons" class="mx-auto rounded-lg shadow-lg" src="https://github.com/AnubisSK/RasperryContol/blob/main/rasperrypi5.png?raw=true"/>
+         </div>
+         <div class="md:w-1/2 text-center md:text-left md:pl-8">
+          <h2 class="text-4xl font-bold mb-4">
+            Ovládajte svoje Raspberry Pi bezdrôtovo
+          </h2>
+          <p class="text-gray-400 mb-8">
+            Zažite bezproblémové ovládanie Rasperrypi 5 prostredníctvom jednoduchého grafického rozhrania.
+          </p>
+         </div>
+        </section>
+        <section class="my-8">
+         <h3 class="text-3xl font-bold mb-4">
+          Features
+         </h3>
+         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          <div class="bg-gray-800 p-6 rounded-lg shadow-lg transform hover:scale-105 transition-transform">
+           <img alt="Icon representing wireless control" class="mx-auto mb-4" src="https://placehold.co/100x100"/>
+           <h4 class="text-xl font-bold mb-2">
+            Wireless Control
+           </h4>
+           <p class="text-gray-400">
+            Control your Raspberry Pi from anywhere in the world.
+           </p>
+          </div>
+          <div class="bg-gray-800 p-6 rounded-lg shadow-lg transform hover:scale-105 transition-transform">
+           <img alt="Icon representing 3D effects" class="mx-auto mb-4" src="https://placehold.co/100x100"/>
+           <h4 class="text-xl font-bold mb-2">
+            3D Effects
+           </h4>
+           <p class="text-gray-400">
+            Enjoy stunning 3D effects for a modern user experience.
+           </p>
+          </div>
+          <div class="bg-gray-800 p-6 rounded-lg shadow-lg transform hover:scale-105 transition-transform">
+           <img alt="Icon representing glitch effects" class="mx-auto mb-4" src="https://placehold.co/100x100"/>
+           <h4 class="text-xl font-bold mb-2">
+            Glitch Effects
+           </h4>
+           <p class="text-gray-400">
+            Add a touch of glitch effects for a unique visual appeal.
+           </p>
+          </div>
+         </div>
+        </section>
+        <section class="my-8">
+            <h3 class="text-3xl font-bold mb-4">
+             Latest News
+            </h3>
+            <div class="space-y-4">
+             <div class="bg-gray-800 p-4 rounded-lg shadow-lg flex items-center transform hover:scale-105 transition-transform">
+              <img alt="Thumbnail of the latest news article" class="rounded-lg mr-4" src="https://placehold.co/100x100"/>
+              <div>
+               <h4 class="text-xl font-bold">
+                New Update Released
+               </h4>
+               <p class="text-gray-400">
+                We have released a new update with exciting features.
+               </p>
+              </div>
+             </div>
+             <div class="bg-gray-800 p-4 rounded-lg shadow-lg flex items-center transform hover:scale-105 transition-transform">
+              <img alt="Thumbnail of the latest news article" class="rounded-lg mr-4" src="https://placehold.co/100x100"/>
+              <div>
+               <h4 class="text-xl font-bold">
+                Community Event
+               </h4>
+               <p class="text-gray-400">
+                Join our upcoming community event to learn more.
+               </p>
+              </div>
+             </div>
+             <div class="bg-gray-800 p-4 rounded-lg shadow-lg flex items-center transform hover:scale-105 transition-transform">
+              <img alt="Thumbnail of the latest news article" class="rounded-lg mr-4" src="https://placehold.co/100x100"/>
+              <div>
+               <h4 class="text-xl font-bold">
+                Feature Spotlight
+               </h4>
+               <p class="text-gray-400">
+                Discover the new features in our latest release.
+               </p>
+              </div>
+             </div>
+            </div>
+           </section>
+          </main>
+          <footer class="p-4 bg-gray-800 text-center">
+            <p class="text-gray-400">
+             © 2025 AnubisSVK. All rights reserved.
+            </p>
+          </footer>
+</body>
+</html>

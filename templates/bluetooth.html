@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="sk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Skenovanie Bluetooth</title>
+    <script>
+        async function scanBluetooth() {
+            const response = await fetch('/scan_bluetooth');
+            const data = await response.json();
+            const bluetoothList = document.getElementById('bluetooth-list');
+            bluetoothList.innerHTML = '';
+            data.forEach(device => {
+                const li = document.createElement('li');
+                li.textContent = `${device.mac_address} - ${device.name}`;
+                bluetoothList.appendChild(li);
+            });
+        }
+
+        async function connectBluetooth() {
+            const macAddress = document.getElementById('mac-address').value;
+            const response = await fetch('/connect_bluetooth', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ mac_address: macAddress })
+            });
+            const result = await response.json();
+            alert(result.message || result.error);
+        }
+    </script>
+</head>
+<body>
+    <h1>Skenovanie Bluetooth zariadení</h1>
+    <button onclick="scanBluetooth()">Skenovať Bluetooth</button>
+    <ul id="blu etooth-list"></ul>
+    <h2>Pripojiť sa k Bluetooth zariadeniu</h2>
+    <input type="text" id="mac-address" placeholder="MAC adresa">
+    <button onclick="connectBluetooth()">Pripojiť</button>
+</body>
+</html>

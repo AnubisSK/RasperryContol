@@ -1,0 +1,227 @@
+<html lang="sk">
+ <head>
+  <meta charset="utf-8"/>
+  <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+  <title>
+   Raspberry Pi 5 GPIO Control
+  </title>
+  <script src="https://cdn.tailwindcss.com">
+  </script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/js/all.min.js">
+  </script>
+  <style>
+   .gpio-pin {
+            width: 50px;
+            height: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 2px solid #4A5568;
+            border-radius: 8px;
+            cursor: pointer;
+        }
+        .gpio-pin.active {
+            background-color: #48BB78;
+        }
+  </style>
+ </head>
+ <body class="bg-gray-900 text-white">
+    <nav class="bg-[#121212] p-4 flex justify-between items-center">
+        <div class="text-xl font-bold">
+         RasperryContol
+        </div>
+        <div class="space-x-4">
+         <a class="hover:text-gray-400" href="{{ url_for('home') }}">
+          Domov
+         </a>
+         <a class="hover:text-gray-400" href="{{ url_for('konzola') }}">
+          Konzola
+         </a>
+         <a class="hover:text-gray-400" href="{{ url_for('gpio_ovladanie') }}">
+          GPIO Ovladanie
+         </a>
+         <a class="hover:text-gray-400" href="{{ url_for('wifi') }}">
+            Skenovať Wi-Fi
+           </a>
+         <a class="hover:text-gray-400" href="{{ url_for('bluetooth') }}">
+            Skenovať Bluetooth
+         </a>
+         <a class="hover:text-gray-400" href="#">
+          Napoveda
+         </a>
+         <a class="hover:text-gray-400" href="{{ url_for('logout') }}">Odhlásiť sa</a>
+        </div>
+        <div class="flex items-center space-x-2">
+         <span>
+            Vitajte, {{ username }}!
+         </span>
+        </div>
+    </nav>
+  <nav class="bg-gray-800 p-4 flex justify-between items-center">
+   <div class="text-xl font-bold">
+    Raspberry Pi 5 GPIO Control
+   </div>
+  </nav>
+  <main class="p-8">
+   <h1 class="text-3xl font-bold text-center mb-8">
+    GPIO Pin Control
+   </h1>
+   <div class="flex justify-center mb-8">
+    <img alt="Raspberry Pi 5 GPIO layout" class="border-2 border-gray-700 rounded-lg" height="400" src="https://storage.googleapis.com/a1aa/image/w6ssXVrtUy4QFR2EYgptVtVY1GoTm8qjvkR6pA8PreGYguBKA.jpg" width="600"/>
+   </div>
+   <div class="grid grid-cols-4 gap-4 justify-center">
+    <!-- GPIO Pins -->
+    <div class="gpio-pin" id="pin-1" onclick="togglePin(1)">
+     1
+    </div>
+    <div class="gpio-pin" id="pin-2" onclick="togglePin(2)">
+     2
+    </div>
+    <div class="gpio-pin" id="pin-3" onclick="togglePin(3)">
+     3
+    </div>
+    <div class="gpio-pin" id="pin-4" onclick="togglePin(4)">
+     4
+    </div>
+    <div class="gpio-pin" id="pin-5" onclick="togglePin(5)">
+     5
+    </div>
+    <div class="gpio-pin" id="pin-6" onclick="togglePin(6)">
+     6
+    </div>
+    <div class="gpio-pin" id="pin-7" onclick="togglePin(7)">
+     7
+    </div>
+    <div class="gpio-pin" id="pin-8" onclick="togglePin(8)">
+     8
+    </div>
+    <div class="gpio-pin" id="pin-9" onclick="togglePin(9)">
+     9
+    </div>
+    <div class="gpio-pin" id="pin-10" onclick="togglePin(10)">
+     10
+    </div>
+    <div class="gpio-pin" id="pin-11" onclick="togglePin(11)">
+     11
+    </div>
+    <div class="gpio-pin" id="pin-12" onclick="togglePin(12)">
+     12
+    </div>
+    <div class="gpio-pin" id="pin-13" onclick="togglePin(13)">
+     13
+    </div>
+    <div class="gpio-pin" id="pin-14" onclick="togglePin(14)">
+     14
+    </div>
+    <div class="gpio-pin" id="pin-15" onclick="togglePin(15)">
+     15
+    </div>
+    <div class="gpio-pin" id="pin-16" onclick="togglePin(16)">
+     16
+    </div>
+    <div class="gpio-pin" id="pin-17" onclick="togglePin(17)">
+     17
+    </div>
+    <div class="gpio-pin" id="pin-18" onclick="togglePin(18)">
+     18
+    </div>
+    <div class="gpio-pin" id="pin-19" onclick="togglePin(19)">
+     19
+    </div>
+    <div class="gpio-pin" id="pin-20" onclick="togglePin(20)">
+     20
+    </div>
+    <div class="gpio-pin" id="pin-21" onclick="togglePin(21)">
+     21
+    </div>
+    <div class="gpio-pin" id="pin-22" onclick="togglePin(22)">
+     22
+    </div>
+    <div class="gpio-pin" id="pin-23" onclick="togglePin(23)">
+     23
+    </div>
+    <div class="gpio-pin" id="pin-24" onclick="togglePin(24)">
+     24
+    </div>
+    <div class="gpio-pin" id="pin-25" onclick="togglePin(25)">
+     25
+    </div>
+    <div class="gpio-pin" id="pin-26" onclick="togglePin(26)">
+     26
+    </div>
+    <div class="gpio-pin" id="pin-27" onclick="togglePin(27)">
+     27
+    </div>
+    <div class="gpio-pin" id="pin-28" onclick="togglePin(28)">
+     28
+    </div>
+    <div class="gpio-pin" id="pin-29" onclick="togglePin(29)">
+     29
+    </div>
+    <div class="gpio-pin" id="pin-30" onclick="togglePin(30)">
+     30
+    </div>
+    <div class="gpio-pin" id="pin-31" onclick="togglePin(31)">
+     31
+    </div>
+    <div class="gpio-pin" id="pin-32" onclick="togglePin(32)">
+     32
+    </div>
+    <div class="gpio-pin" id="pin-33" onclick="togglePin(33)">
+     33
+    </div>
+    <div class="gpio-pin" id="pin-34" onclick="togglePin(34)">
+     34
+    </div>
+    <div class="gpio-pin" id="pin-35" onclick="togglePin(35)">
+     35
+    </div>
+    <div class="gpio-pin" id="pin-36" onclick="togglePin(36)">
+     36
+    </div>
+    <div class="gpio-pin" id="pin-37" onclick="togglePin(37)">
+     37
+    </div>
+    <div class="gpio-pin" id="pin-38" onclick="togglePin(38)">
+     38
+    </div>
+    <div class="gpio-pin" id="pin-39" onclick="togglePin(39)">
+     39
+    </div>
+    <div class="gpio-pin" id="pin-40" onclick="togglePin(40)">
+     40
+    </div>
+   </div>
+  </main>
+  <footer class="bg-gray-800 text-center p-4 mt-8">
+   <p>
+    © 2025 AnubisSVK. All rights reserved.
+   </p>
+  </footer>
+  <script>
+   async function togglePin(pin) {
+            const pinElement = document.getElementById(`pin-${pin}`);
+            const isActive = pinElement.classList.toggle('active');
+            // Here you would add the code to actually toggle the GPIO pin using your backend API
+            // Example:
+            // fetch(`/api/gpio/toggle/${pin}`, { method: 'POST' });
+
+            // Odoslanie požiadavky na server
+            const response = await fetch(`/gpio/toggle/${pin}`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ state: !isActive })
+            });
+            const result = await response.json();
+
+            if (result.success) {
+                pinElement.classList.toggle('active');
+            } else {
+                alert(result.error || "Chyba pri ovládaní GPIO pinu.");
+            }
+        }
+  </script>
+ </body>
+</html>

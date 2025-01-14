@@ -1,0 +1,58 @@
+<html>
+  <head>
+    <title>SSH Terminal</title>
+  </head>
+  <body>
+    <nav class="bg-[#121212] p-4 flex justify-between items-center">
+        <div class="text-xl font-bold">
+         RasperryContol
+        </div>
+        <div class="space-x-4">
+         <a class="hover:text-gray-400" href="{{ url_for('home') }}">
+          Domov
+         </a>
+         <a class="hover:text-gray-400" href="{{ url_for('konzola') }}">
+          Konzola
+         </a>
+         <a class="hover:text-gray-400" href="{{ url_for('gpio_ovladanie') }}">
+          GPIO Ovladanie
+         </a>
+         <a class="hover:text-gray-400" href="{{ url_for('wifi') }}">
+          Skenovať Wi-Fi
+         </a>
+         <a class="hover:text-gray-400" href="{{ url_for('bluetooth') }}">
+            Skenovať Bluetooth
+         </a>
+         <a class="hover:text-gray-400" href="#">
+          Napoveda
+         </a>
+         <a class="hover:text-gray-400" href="{{ url_for('logout') }}">Odhlásiť sa</a>
+        </div>
+        <div class="flex items-center space-x-2">
+         <span>
+            Vitajte, {{ username }}!
+         </span>
+        </div>
+    </nav>
+    <h1>SSH Terminal</h1>
+    <form action="/execute" method="post">
+      <input type="text" name="command" placeholder="Zadajte prikaz">
+      <button type="submit">Vykonaj</button>
+    </form>
+    <pre id="output"></pre>
+
+    <script>
+      fetch('/execute', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/x-www-form-urlencoded'
+        },
+        body: 'command=' + document.querySelector('input[name="command"]').value
+      })
+      .then(response => response.text())
+      .then(output => {
+        document.getElementById('output').textContent = output;
+      });
+    </script>
+  </body>
+</html>
