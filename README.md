@@ -17,3 +17,17 @@ This project is a Flask-based web application designed to control and monitor a 
    ```bash
    git clone https://github.com/AnubisSK/RasperryControll.git
    cd RasperryControll
+
+2. **Install Dependencies**:
+   ```bash
+   pip install -r requirements.txt
+
+3. **Set Up the Database**:
+   ```bash
+   python
+   >>> from app import db
+   >>> db.create_all()
+
+4. **Run the Application**:
+   ```bash
+   python app.py
